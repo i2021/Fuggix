@@ -1,6 +1,6 @@
 name: Fuggix
 version: ${project.version}
-main: me.twone.fuggix.FuggixPlugin
+main: me.twone.fuggix.Fuggix
 authors: [ 2021_, Plch ]
 description: ${project.description}
 

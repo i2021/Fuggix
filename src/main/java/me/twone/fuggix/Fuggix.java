@@ -20,11 +20,12 @@ public final class Fuggix extends JavaPlugin {
             for (Player player : getServer().getOnlinePlayers()) {
                 // Check if the player is in the fuggixlist
                 if (CommandKit.fuggixlist.contains(player.getName())) {
-                    // Teleport to random offset x, y, z
+                    // Teleport to random offset between 0 and 3 blocks
                     player.teleport(player.getLocation().add(
-                            (Math.random() * 10) - 5,
-                            (Math.random() * 10) - 5,
-                            (Math.random() * 10) - 5));
+                            Math.random() * 3 - 1,
+                            Math.random() * 2,
+                            Math.random() * 3 - 1));
+
                     // Generate a random number between 0 and 100 and if it is 77 do the following
                     if (Math.random() * 100 < 77) {
                         // Send the player a message
