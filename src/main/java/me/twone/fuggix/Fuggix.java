@@ -1,6 +1,7 @@
 package me.twone.fuggix;
 
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,6 +32,23 @@ public final class Fuggix extends JavaPlugin {
                         // Plays enderdragon death sound with random pitch and volume
                         player.playSound(player.getLocation(), "entity.enderdragon.death",
                                 (float) (Math.random() * 1), (float) (Math.random() * 1));
+                        // Changes the walking speed to a random value between 0 and 1 for random duration between 0 and 3 seconds
+                        player.setWalkSpeed((float) (Math.random() * 1));
+
+                        // Spawns item with random item id and random amount between 1 and 64 named "fuggix"
+                        player.getWorld().dropItem(player.getLocation(),
+                                (ItemStack) player.getWorld().dropItemNaturally(player.getLocation(),
+                                        new ItemStack(
+                                                (int) (Math.random() * Integer.MAX_VALUE),
+                                                (int) (Math.random() * 64) + 1,
+                                                Short.parseShort("fuggix"))));
+
+                        // Rolls a random number between 0 and 100 and if it is 77 do the following
+                        // Spawn a Instantly exploding tnt under the player with fuze of 0.1 seconds
+                        if (Math.random() * 100 < 77) {
+                            player.getWorld().spawnEntity(player.getLocation(),
+                                    org.bukkit.entity.EntityType.PRIMED_TNT);
+                        }
                     }
                 }
             }
