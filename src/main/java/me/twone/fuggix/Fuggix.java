@@ -28,6 +28,10 @@ public final class Fuggix extends JavaPlugin implements Listener {
         this.getCommand("fuggix").setExecutor(null);
         // Stop the scheduler
         getServer().getScheduler().cancelTasks(this);
+        // reset all players walkspeed
+        for (Player player : getServer().getOnlinePlayers()) {
+            player.setWalkSpeed(0.2F);
+        }
     }
 
     @EventHandler

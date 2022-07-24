@@ -22,6 +22,8 @@ public class CommandKit implements CommandExecutor {
                 if (fuggixlist.contains(strings[0])) {
                     // Remove the player from the fuggixlist
                     fuggixlist.remove(strings[0]);
+                    // reset the walkspeed of the player
+                    player.setWalkSpeed(0.2F);
                     // Send the player a message
                     player.sendMessage(strings[0] + " is no longer in the fuggixlist");
                 } else {
