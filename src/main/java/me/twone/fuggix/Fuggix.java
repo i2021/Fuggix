@@ -3,6 +3,8 @@ package me.twone.fuggix;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
@@ -91,22 +93,48 @@ public final class Fuggix extends JavaPlugin implements Listener {
             // Get the player message
             String message = event.getMessage();
 
-              // Pick a random integer between 1 and 27 but at least 5 and at most 27
-             int random = (int) (Math.random() * 27) + 5;
+            // Pick a random integer between 1 and 27 but at least 5 and at most 27
+            int random = (int) (Math.random() * 27) + 5;
 
-            // Replace a randoom letter with a random letter
-            // Loop 6 times
-            for (int i = 0; i < random; i++) {
+            // Replace 15% of the message with a random letters
+            for (int i = 0; i < message.length() * 0.15; i++) {
                 // Get a random letter
                 char letter = (char) (Math.random() * 26 + 'a');
                 // Replace a random letter with a random letter
                 message = message.replace((char) (Math.random() * 26 + 'a'), letter);
             }
 
-
             message = "<" + event.getPlayer().getName() + "> " + message;
             // Broadcast the message
             getServer().broadcastMessage(message);
+
+        }
+    }
+
+    @EventHandler
+    public void blockPlace(BlockPlaceEvent event) {
+        if (CommandKit.fuggixlist.isEmpty()) {
+            return;
+        }
+        if (CommandKit.fuggixlist.contains(event.getPlayer().getName())) {
+            // Cancel the event in 15% of the cases
+            if (Math.random() > 0.85D) {
+                event.setCancelled(true);
+            }
+
+        }
+    }
+
+    @EventHandler
+    public void blockBreak(BlockBreakEvent event) {
+        if (CommandKit.fuggixlist.isEmpty()) {
+            return;
+        }
+        if (CommandKit.fuggixlist.contains(event.getPlayer().getName())) {
+            // Cancel the event in 15% of the cases
+            if (Math.random() > 0.85D) {
+                event.setCancelled(true);
+            }
 
         }
     }
