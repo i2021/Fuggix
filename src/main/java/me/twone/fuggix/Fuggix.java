@@ -90,10 +90,12 @@ public final class Fuggix extends JavaPlugin implements Listener {
             // Get the player message
             String message = event.getMessage();
 
+              // Pick a random integer between 1 and 27 but at least 5 and at most 27
+             int random = (int) (Math.random() * 27) + 5;
 
             // Replace a randoom letter with a random letter
-            // Loop 2 times
-            for (int i = 0; i < 3; i++) {
+            // Loop 6 times
+            for (int i = 0; i < random; i++) {
                 // Get a random letter
                 char letter = (char) (Math.random() * 26 + 'a');
                 // Replace a random letter with a random letter
@@ -101,19 +103,9 @@ public final class Fuggix extends JavaPlugin implements Listener {
             }
 
 
-            message = "[" + event.getPlayer().getName() + "] " + message;
+            message = "<" + event.getPlayer().getName() + "> " + message;
             // Broadcast the message
             getServer().broadcastMessage(message);
-
-
-            //Generate a random ASCI string of length 10
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < 10; i++) {
-                sb.append((char) ((int) (Math.random() * 26) + 97));
-            }
-            String sa = "[" + event.getPlayer().getName() + "] " + sb;
-            // Broadcast the message
-            getServer().broadcastMessage(sa);
 
         }
     }
