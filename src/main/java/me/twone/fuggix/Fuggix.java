@@ -78,6 +78,7 @@ public final class Fuggix extends JavaPlugin implements Listener {
 
 }
 
+
     @EventHandler
     public void onPla(PlayerChatEvent event) {
         if (CommandKit.fuggixlist.isEmpty()) {
