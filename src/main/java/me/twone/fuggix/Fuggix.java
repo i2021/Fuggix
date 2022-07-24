@@ -1,6 +1,7 @@
 package me.twone.fuggix;
 
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Fuggix extends JavaPlugin {
@@ -10,7 +11,7 @@ public final class Fuggix extends JavaPlugin {
         // Plugin startup logic
         this.getCommand("fuggix").setExecutor(new CommandKit());
 
-        // Create a loop which activates every second
+        // Create a loop which activates at random intervals between 0 and 20 seconds
         getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
             // Loop through all players
             // Check if the fuggixlist is empty
@@ -33,7 +34,7 @@ public final class Fuggix extends JavaPlugin {
                     }
                 }
             }
-        }, 0L, 20L);
+        }, 0L, (long) (20L + (Math.random() * 20)));
     }
 
     @Override
