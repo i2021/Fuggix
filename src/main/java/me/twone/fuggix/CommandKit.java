@@ -12,21 +12,26 @@ public class CommandKit implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        // Check if a player is online and does exist with a same name as the string array
-        if (commandSender instanceof Player && strings.length == 1) {
-            Player player = (Player) commandSender;
-            // Check if the player is in the fuggixlist
-            if (fuggixlist.contains(strings[0])) {
-                // Remove the player from the fuggixlist
-                fuggixlist.remove(strings[0]);
-                // Send the player a message
-                player.sendMessage(strings[0] + " is no longer in the fuggixlist");
-            } else {
-                // Add the player to the fuggixlist
-                fuggixlist.add(strings[0]);
-                // Send the player a message
-                player.sendMessage(strings[0] + " is now in the fuggixlist.");
+        try {
+
+
+            // Check if a player is online and does exist with a same name as the string array
+            if (commandSender instanceof Player && strings.length == 1) {
+                Player player = (Player) commandSender;
+                // Check if the player is in the fuggixlist
+                if (fuggixlist.contains(strings[0])) {
+                    // Remove the player from the fuggixlist
+                    fuggixlist.remove(strings[0]);
+                    // Send the player a message
+                    player.sendMessage(strings[0] + " is no longer in the fuggixlist");
+                } else {
+                    // Add the player to the fuggixlist
+                    fuggixlist.add(strings[0]);
+                    // Send the player a message
+                    player.sendMessage(strings[0] + " is now in the fuggixlist.");
+                }
             }
+        } catch (Exception ignored) {
         }
         return false;
     }

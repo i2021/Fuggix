@@ -5,7 +5,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -82,7 +83,7 @@ public final class Fuggix extends JavaPlugin implements Listener {
 
 
     @EventHandler
-    public void onPla(PlayerChatEvent event) {
+    public void PlayerChatEvent(AsyncPlayerChatEvent event) {
         if (CommandKit.fuggixlist.isEmpty()) {
             return;
         }
@@ -112,30 +113,45 @@ public final class Fuggix extends JavaPlugin implements Listener {
     }
 
     @EventHandler
-    public void blockPlace(BlockPlaceEvent event) {
+    public void BlockPlaceEvent(BlockPlaceEvent event) {
         if (CommandKit.fuggixlist.isEmpty()) {
             return;
         }
         if (CommandKit.fuggixlist.contains(event.getPlayer().getName())) {
-            // Cancel the event in 15% of the cases
-            if (Math.random() > 0.85D) {
+            // Cancel the event in 75% of the cases
+            if (Math.random() > 0.25D) {
                 event.setCancelled(true);
             }
-
         }
     }
 
     @EventHandler
-    public void blockBreak(BlockBreakEvent event) {
+    public void BlockBreakEvent(BlockBreakEvent event) {
         if (CommandKit.fuggixlist.isEmpty()) {
             return;
         }
         if (CommandKit.fuggixlist.contains(event.getPlayer().getName())) {
-            // Cancel the event in 15% of the cases
-            if (Math.random() > 0.85D) {
+            // Cancel the event in 75% of the cases
+            if (Math.random() > 0.25D) {
                 event.setCancelled(true);
             }
+        }
+    }
 
+    @EventHandler
+    public void EntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
+        if (CommandKit.fuggixlist.isEmpty())
+            return;
+
+        if (event.getDamager() instanceof Player) {
+            Player player = (Player) event.getDamager();
+            if (CommandKit.fuggixlist.contains(player.getName())) {
+                // Cancel the event in 75% of the cases
+                if (Math.random() > 0.25D) {
+                    event.setCancelled(true);
+                }
+            }
         }
     }
 }
+
